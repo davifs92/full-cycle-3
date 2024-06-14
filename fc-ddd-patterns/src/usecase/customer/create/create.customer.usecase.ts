@@ -1,7 +1,7 @@
-import CustomerFactory from "../../../../domain/customer/factory/customer.factory";
-import CustomerRepositoryInterface from "../../../../domain/customer/repository/customer-repository.interface";
-import Address from "../../../../domain/customer/value-object/address";
-import CustomerRepository from "../../../../infrastructure/customer/repository/sequelize/customer.repository";
+import CustomerFactory from "../../../domain/customer/factory/customer.factory";
+import CustomerRepositoryInterface from "../../../domain/customer/repository/customer-repository.interface";
+import Address from "../../../domain/customer/value-object/address";
+import CustomerRepository from "../../../infrastructure/customer/repository/sequelize/customer.repository";
 import { InputCreateCustomerDto, OutputCreateCustomerDto } from "./create.customer.dto";
 import { v4 as uuid } from 'uuid';
 
