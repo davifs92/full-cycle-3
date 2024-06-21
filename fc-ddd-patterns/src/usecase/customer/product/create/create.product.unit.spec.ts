@@ -1,3 +1,5 @@
+import CreateProductUseCase from "./create.product.usecase";
+
 const input = {
     name: "Product 1",
     price: 10
@@ -17,9 +19,9 @@ describe("Unit test to Product Use Case", () => {
 it("should create a product", async () => {
 
     const productRepository = MockRepository();
-    const useCase = new ProductCreateUseCase(productRepository);
+    const useCase = new CreateProductUseCase(productRepository);
 
-    const output = await useCase.execute(input);
+    const output = await useCase.execute("a", input);
 
     expect(output).toEqual({
         name: input.name,
