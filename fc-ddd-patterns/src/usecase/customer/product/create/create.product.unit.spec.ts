@@ -32,4 +32,20 @@ it("should create a product", async () => {
 
 });
 
+
+it("should throw an error when type is missing", async () => {
+
+    const productRepository = MockRepository();
+    const useCase = new CreateProductUseCase(productRepository);
+
+   
+
+    await expect(useCase.execute("c", input)).rejects.toThrow(
+        "Product type not supported"
+    );
+
+
+
+});
+
 })
