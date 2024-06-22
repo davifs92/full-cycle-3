@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
-import ProductFactory from "../../../../domain/product/factory/product.factory";
+import ProductFactory from "../../../domain/product/factory/product.factory";
 import FindProductUseCase from "./find.product.usecase";
 
 const product = ProductFactory.create("a", "Product Test", 123);
