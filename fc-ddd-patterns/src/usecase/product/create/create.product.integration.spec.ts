@@ -1,13 +1,13 @@
 import { Sequelize } from "sequelize-typescript";
 import ProductModel from "../../../infrastructure/product/repository/sequelize/product.model";
 import ProductRepository from "../../../infrastructure/product/repository/sequelize/product.repository";
-import FindProductUseCase from "./find.product.usecase";
 import Product from "../../../domain/product/entity/product";
 import { v4 as uuid } from "uuid";
+import CreateProductUseCase from "./create.product.usecase";
 
 
 
-describe ("Integration find product usecase", () => {
+describe ("Integration create product usecase", () => {
 
     let sequelize: Sequelize;
 
@@ -28,28 +28,19 @@ describe ("Integration find product usecase", () => {
         await sequelize.close();
       });
 
-      it("should find a product", async () => {
+      it("should create a product", async () => {
 
 
         const product = new Product(uuid(), "Product test", 123);
 
         const productRepository = new ProductRepository();
-        const useCase =  new FindProductUseCase(productRepository);
+        const useCase =  new CreateProductUseCase(productRepository);
         const productCreated = await productRepository.create(product);
 
-
-        const input = {
-            id: product.id,
-        }
-
-        const output = {
-          id: product.id,
-          name: "Product test",
-          price: 123
-        }
-
-        const result = await useCase.execute(input);
-        expect(result).toEqual(output);
+ 
+        const result = await useCase.execute("a", product);
+        expect(result.name).toEqual(product.name);
+        expect(result.price).toEqual(product.price);
 
       });
 

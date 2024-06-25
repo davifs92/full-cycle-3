@@ -24,6 +24,7 @@ it("should create a product", async () => {
     const output = await useCase.execute("a", input);
 
     expect(output).toEqual({
+        id: output.id,
         name: input.name,
         price: input.price,
     })

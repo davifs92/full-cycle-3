@@ -1,13 +1,13 @@
 import { Sequelize } from "sequelize-typescript";
 import ProductModel from "../../../infrastructure/product/repository/sequelize/product.model";
 import ProductRepository from "../../../infrastructure/product/repository/sequelize/product.repository";
-import FindProductUseCase from "./find.product.usecase";
 import Product from "../../../domain/product/entity/product";
 import { v4 as uuid } from "uuid";
+import ListProductUseCase from "./list.product.usecase";
 
 
 
-describe ("Integration find product usecase", () => {
+describe ("Integration list all products usecase", () => {
 
     let sequelize: Sequelize;
 
@@ -28,28 +28,26 @@ describe ("Integration find product usecase", () => {
         await sequelize.close();
       });
 
-      it("should find a product", async () => {
+      it("should lsit all products", async () => {
 
 
-        const product = new Product(uuid(), "Product test", 123);
+        const product1 = new Product(uuid(), "Product test 1", 123);
+        const product2 = new Product(uuid(), "Product test 2", 456);
 
         const productRepository = new ProductRepository();
-        const useCase =  new FindProductUseCase(productRepository);
-        const productCreated = await productRepository.create(product);
+        const useCase =  new ListProductUseCase(productRepository);
+        const productCreated1 = await productRepository.create(product1);
+        const productCreated2 = await productRepository.create(product2);
+
+   
+        const result = await useCase.execute({});
+        expect(result.products[0].name).toEqual(product1.name);
+        expect(result.products[0].price).toEqual(product1.price);
+        expect(result.products[1].name).toEqual(product2.name);
+        expect(result.products[1].price).toEqual(product2.price);
 
 
-        const input = {
-            id: product.id,
-        }
 
-        const output = {
-          id: product.id,
-          name: "Product test",
-          price: 123
-        }
-
-        const result = await useCase.execute(input);
-        expect(result).toEqual(output);
 
       });
 
