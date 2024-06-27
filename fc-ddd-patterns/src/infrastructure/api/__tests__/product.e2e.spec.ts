@@ -49,7 +49,7 @@ describe("E2E test for product", () => {
             .send({
                 type: "a",
                 name: "Product 2",
-                price: 456
+                price: 456 
             });
 
         // Obtém a lista de produtos
