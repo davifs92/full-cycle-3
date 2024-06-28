@@ -21,17 +21,15 @@ productRoute.post('/', async (req: Request, res: Response) => {
             price: req.body.price
             
         }
-        console.log(productDto);
         const output = await usecase.execute(type, productDto);
         res.send(output);
     } catch (err) {
-        console.log(req);
         res.status(500).send(err);
     }
 });
 
 
-productRoute.get('/', async(req: Request, res: Response) => {
+productRoute.get('/', async (req: Request, res: Response) => {
 
     try{
     const usecase = new ListProductUseCase(new ProductRepository());

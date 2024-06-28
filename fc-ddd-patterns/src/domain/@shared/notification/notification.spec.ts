@@ -2,7 +2,7 @@ import Notification from "./notification";
 
 describe("unit test for notifications", () => {
 
-    it("should create errors", () => {
+    it("should create errors for customers", () => {
         const notification = new Notification();
         const error = {
             message: "error message",
